@@ -1,4 +1,4 @@
-package com.jodev.businessappmusic.suggestionmicroservice;
+package com.appmusic.microservice;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

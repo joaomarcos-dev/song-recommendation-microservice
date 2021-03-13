@@ -1,4 +1,4 @@
-package com.jodev.businessappmusic.suggestionmicroservice.model;
+package com.appmusic.model;
 
 //@MappedSuperclass
 //@JsonbNillable
