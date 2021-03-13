@@ -37,3 +37,5 @@ build/
 ### Eclipse ###
 bin/
 project-description.txt
+**/src/main/**/sensitive.properties
+**/src/test/**/sensitive.properties
