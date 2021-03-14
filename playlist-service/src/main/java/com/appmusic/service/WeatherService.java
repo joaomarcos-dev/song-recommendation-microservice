@@ -36,7 +36,7 @@ public class WeatherService {
 		super();
 	}
 	
-	public WeatherPojo fetchWeather(Double latitude, Double longitude) {
+	public WeatherPojo fetchWeatherByCoodinates(Double latitude, Double longitude) {
 //		weather?lat={lat}&lon={lon}&appid={API key}
 		
 		LOGGER.info(String.format("%s/weather?lat=%s&lon=%s&appid=%s", openWeatherBaseUrl, latitude, longitude, apiId));
@@ -105,6 +105,12 @@ public class WeatherService {
 		return wp;
 		
 	}	
+	
+	public WeatherPojo fetchWeatherByCityName(String cityName) {
+		
+		return restTemplate.getForObject(String.format("%s/weather?%s&appid=%s", openWeatherBaseUrl, cityName, apiId), WeatherPojo.class);
+		
+	}
 	
 	public static Float fromKelvinToCelsius(Float kelvin) {
 		return kelvin - Float.valueOf("273.15");
