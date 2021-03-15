@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- Importing Spring Configuration -->
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	
+	<!-- A kind of logger the logs everything not specified in the name attribute of a explicitly defined <logger> -->
+	<logger name="org.springframework.web" level="DEBUG"/>
+	
+	<!-- APPENDERS -->
+	
+	<appender name="DBAppenderExt" class="ch.qos.logback.classic.db.DBAppender">
+	    <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+	      <driverClass>com.mysql.cj.jdbc.Driver</driverClass>
+	      <url>jdbc:mysql://localhost:3306/microservice?useTimezone=true&amp;serverTimezone=UTC</url>
+	      <user>root</user>
+	      <password>a394b@</password>
+	    </connectionSource>
+	   	<!-- <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+	      <layout class="ch.qos.logback.classic.PatternLayout">
+	        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+	      </layout>
+	    </encoder> -->
+  	</appender>
+  	
+	<!-- LOGGERS -->
+	
+	<!-- Means that for all the classes specified in name attribute, We will 
+		log DEBUG information for the registered APPENDERS -->
+	<logger name="RequestLogger" level="trace">
+		<appender-ref ref="DBAppenderExt"/>						
+	</logger>
+	
+</configuration>

@@ -101,8 +101,8 @@ public class RecommendationService implements EnvironmentAware {
 		
 		this.genreTmpRangeMap.forEach((g, t) -> {
 			
-			LOGGER.info(g.toString());
-			LOGGER.info(t.toString());
+//			LOGGER.info(g.toString());
+//			LOGGER.info(t.toString());
 			
 		});
 	}

@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
+import com.appmusic.microservice.filters.RequestLogger;
+
 @SpringBootApplication
 @EnableEurekaClient
 @ComponentScan("com.appmusic")
@@ -14,10 +16,18 @@ public class PlaylistMicroservice {
 	
 	@Bean
 	public RestTemplate getRestTemplate() {
+		
 		return new RestTemplate();
 	};
+	
+	@Bean
+	public RequestLogger getRequestResponseLogger() {
+		
+		return new RequestLogger();
+	}
 
 	public static void main(String[] args) {
+		
 		SpringApplication.run(PlaylistMicroservice.class, args);
 	}
 

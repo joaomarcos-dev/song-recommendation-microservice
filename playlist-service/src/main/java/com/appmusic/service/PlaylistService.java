@@ -44,7 +44,7 @@ public class PlaylistService {
 		//URL
 		URI uri = new URI( String.format("%s/recommendations?seed_genres=%s", spotifyApiBaseUrl, genre.name().toLowerCase()));
 		
-		LOGGER.info(uri.toASCIIString());
+//		LOGGER.info(uri.toASCIIString());
 
 		//Headers
 		HttpHeaders headers = new HttpHeaders();		
@@ -52,7 +52,7 @@ public class PlaylistService {
 		headers.setBearerAuth(sbtp.getAccessToken());
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		
-		LOGGER.info(sbtp.getAccessToken());
+//		LOGGER.info(sbtp.getAccessToken());
 		
 //		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
 //		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -67,7 +67,7 @@ public class PlaylistService {
 		ResponseEntity<PlaylistPojo> response = restTemplate.exchange(requestEntity, PlaylistPojo.class);
 //		ResponseEntity<String> response = restTemplate.exchange(requestEntity, String.class);
 
-		LOGGER.info(response.getHeaders().getContentType().toString());
+//		LOGGER.info(response.getHeaders().getContentType().toString());
 		
 		return response.getBody();
 //		return null;

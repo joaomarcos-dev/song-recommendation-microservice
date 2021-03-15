@@ -39,7 +39,7 @@ public class WeatherService {
 	public WeatherPojo fetchWeatherByCoodinates(Double latitude, Double longitude) {
 //		weather?lat={lat}&lon={lon}&appid={API key}
 		
-		LOGGER.info(String.format("%s/weather?lat=%s&lon=%s&appid=%s", openWeatherBaseUrl, latitude, longitude, apiId));
+//		LOGGER.info(String.format("%s/weather?lat=%s&lon=%s&appid=%s", openWeatherBaseUrl, latitude, longitude, apiId));
 		
 		ObjectMapper om = new ObjectMapper();
 		WeatherPojo wp = null;

@@ -42,7 +42,7 @@ public class PlaylistDeserializer extends StdDeserializer<PlaylistPojo> {
 		
 		jsonNode.get("tracks").forEach(jn -> {
 			
-			LOGGER.info(jn.get("name").toPrettyString());
+//			LOGGER.info(jn.get("name").toPrettyString());
 			
 			TrackPojo tp = new TrackPojo();
 			
