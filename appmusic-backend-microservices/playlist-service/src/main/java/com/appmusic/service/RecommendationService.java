@@ -1,5 +1,7 @@
 package com.appmusic.service;
 
+import static org.apache.commons.lang3.ObjectUtils.anyNotNull;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static org.apache.commons.lang3.ObjectUtils.anyNotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

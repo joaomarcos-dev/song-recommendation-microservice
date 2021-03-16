@@ -11,12 +11,12 @@
 	<groupId>com.jodev.businessappmusic</groupId>
 	<artifactId>businessappmusic-serverservicediscovery</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>businessappmusic-serverservicediscovery</name>
 	<description>The service discovery server</description>
 	
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 		<spring-cloud.version>2020.0.1</spring-cloud.version>
 	</properties>
 	

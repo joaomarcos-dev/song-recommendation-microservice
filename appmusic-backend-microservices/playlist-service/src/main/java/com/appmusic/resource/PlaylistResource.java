@@ -35,7 +35,7 @@ public class PlaylistResource {
 	public PlaylistPojo getPlaylistSuggestion(
 			@QueryParam("latitude") Double latitude,	
 			@QueryParam("longitude") Double longitude,
-			@QueryParam("cityname") String cityName
+			@QueryParam("cityName") String cityName
  			) throws URISyntaxException {
 		
 		WeatherPojo wp = null;

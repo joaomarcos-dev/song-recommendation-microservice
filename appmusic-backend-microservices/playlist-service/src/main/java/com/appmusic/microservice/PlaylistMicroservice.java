@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
+import com.appmusic.microservice.config.AppCorsConfiguration;
 import com.appmusic.microservice.filters.RequestLogger;
 
 @SpringBootApplication
@@ -25,6 +26,12 @@ public class PlaylistMicroservice {
 		
 		return new RequestLogger();
 	}
+	
+	@Bean
+	public AppCorsConfiguration getCorsConfiguration() {
+		return new AppCorsConfiguration();
+	}
+	
 
 	public static void main(String[] args) {
 		

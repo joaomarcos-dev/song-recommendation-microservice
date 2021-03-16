@@ -107,8 +107,13 @@ public class WeatherService {
 	}	
 	
 	public WeatherPojo fetchWeatherByCityName(String cityName) {
+		LOGGER.debug("Featching weather by cituname {}", cityName);
 		
-		return restTemplate.getForObject(String.format("%s/weather?%s&appid=%s", openWeatherBaseUrl, cityName, apiId), WeatherPojo.class);
+		String url = String.format("%s/weather?appid=%s&q=%s", openWeatherBaseUrl, apiId, cityName);
+		
+		LOGGER.debug(url);
+		
+		return restTemplate.getForObject(url, WeatherPojo.class);
 		
 	}
 	
