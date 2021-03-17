@@ -6,6 +6,8 @@ import java.util.Base64;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -21,10 +24,10 @@ import org.springframework.web.client.RestTemplate;
 import com.appmusic.model.SpotifyBearerTokenPojo;
 
 @Service
-@PropertySource("sensitive.properties")
+@PropertySource("classpath:sensitive.properties")
 public class SpotifyBearerTokenService {
 	
-//	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -44,8 +47,10 @@ public class SpotifyBearerTokenService {
 		super();
 	}
 	
-	@PostConstruct
+	@Scheduled(fixedRateString = "${appmusic.spotifyapi.token-expiration-milleseconds}") //Renew the token
 	private void getBearerToken() throws URISyntaxException {
+		
+		LOGGER.debug("Renewing Spotify token");
 		
 		//URL
 		URI uri = new URI( String.format("%s/token", spotifyAccountBaseUrl));

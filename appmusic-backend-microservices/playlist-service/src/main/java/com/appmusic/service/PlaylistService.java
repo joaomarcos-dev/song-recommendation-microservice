@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.appmusic.model.GenreEnum;
 import com.appmusic.model.PlaylistPojo;
 import com.appmusic.model.SpotifyBearerTokenPojo;
 
@@ -39,12 +40,10 @@ public class PlaylistService {
 		super();
 	}
 	
-	public PlaylistPojo playlistByGenre(Genre genre) throws URISyntaxException{
+	public PlaylistPojo playlistByGenre(GenreEnum genre) throws URISyntaxException{
 		
 		//URL
-		URI uri = new URI( String.format("%s/recommendations?seed_genres=%s", spotifyApiBaseUrl, genre.name().toLowerCase()));
-		
-//		LOGGER.info(uri.toASCIIString());
+		URI uri = new URI( String.format("%s/recommendations?seed_genres=%s", spotifyApiBaseUrl, genre.name().toLowerCase()));	
 
 		//Headers
 		HttpHeaders headers = new HttpHeaders();		
@@ -52,26 +51,12 @@ public class PlaylistService {
 		headers.setBearerAuth(sbtp.getAccessToken());
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		
-//		LOGGER.info(sbtp.getAccessToken());
-		
-//		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-//		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-//		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-//		
-//		messageConverters.add(converter);
-//		restTemplate.setMessageConverters(messageConverters);
-		
 		//Request
 		RequestEntity<PlaylistPojo> requestEntity = new RequestEntity<PlaylistPojo>(headers, HttpMethod.GET, uri);
 		
 		ResponseEntity<PlaylistPojo> response = restTemplate.exchange(requestEntity, PlaylistPojo.class);
-//		ResponseEntity<String> response = restTemplate.exchange(requestEntity, String.class);
 
-//		LOGGER.info(response.getHeaders().getContentType().toString());
-		
 		return response.getBody();
-//		return null;
-		
 	}
 	
 }

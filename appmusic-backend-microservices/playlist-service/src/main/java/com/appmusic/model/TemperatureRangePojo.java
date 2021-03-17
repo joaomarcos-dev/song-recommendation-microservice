@@ -2,7 +2,7 @@ package com.appmusic.model;
 
 import javax.annotation.Generated;
 
-public class TemperatureRange {
+public class TemperatureRangePojo {
 
 	public Boolean getMinTmpInclusive() {
 		return minTmpInclusive;
@@ -27,7 +27,7 @@ public class TemperatureRange {
 	private Boolean maxTmpInclusive;
 
 	@Generated("SparkTools")
-	private TemperatureRange(Builder builder) {
+	private TemperatureRangePojo(Builder builder) {
 		this.minTmp = builder.minTmp;
 		this.maxTmp = builder.maxTmp;
 	}
@@ -44,7 +44,7 @@ public class TemperatureRange {
 		return maxTmp;
 	}
 
-	public TemperatureRange() {
+	public TemperatureRangePojo() {
 		super();
 	}
 
@@ -53,7 +53,7 @@ public class TemperatureRange {
 	}
 
 	/**
-	 * Creates builder to build {@link TemperatureRange}.
+	 * Creates builder to build {@link TemperatureRangePojo}.
 	 * 
 	 * @return created builder
 	 */
@@ -63,7 +63,7 @@ public class TemperatureRange {
 	}
 
 	/**
-	 * Builder to build {@link TemperatureRange}.
+	 * Builder to build {@link TemperatureRangePojo}.
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
@@ -83,8 +83,8 @@ public class TemperatureRange {
 			return this;
 		}
 
-		public TemperatureRange build() {
-			return new TemperatureRange(this);
+		public TemperatureRangePojo build() {
+			return new TemperatureRangePojo(this);
 		}
 	}
 

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.appmusic.model.GenreEnum;
 import com.appmusic.model.PlaylistPojo;
 import com.appmusic.model.WeatherPojo;
-import com.appmusic.service.Genre;
 import com.appmusic.service.PlaylistService;
 import com.appmusic.service.RecommendationService;
 import com.appmusic.service.WeatherService;
@@ -49,7 +49,7 @@ public class PlaylistResource {
 			wp = weatherService.fetchWeatherByCityName(cityName);
 		}
 		
-		Genre genre = recommendationService.getRecommendation(wp.getTemperature());
+		GenreEnum genre = recommendationService.getRecommendation(wp.getTemperature());
 			
 		return spotifyPlaylistService.playlistByGenre(genre);
 	}

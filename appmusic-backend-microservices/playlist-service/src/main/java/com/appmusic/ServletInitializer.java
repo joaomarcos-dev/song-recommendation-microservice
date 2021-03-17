@@ -1,4 +1,4 @@
-package com.appmusic.microservice;
+package com.appmusic;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

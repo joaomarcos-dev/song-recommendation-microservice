@@ -1,4 +1,4 @@
-package com.appmusic.microservice.filters;
+package com.appmusic.filters;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

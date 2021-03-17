@@ -1,17 +1,19 @@
-package com.appmusic.microservice;
+package com.appmusic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
-import com.appmusic.microservice.config.AppCorsConfiguration;
-import com.appmusic.microservice.filters.RequestLogger;
+import com.appmusic.config.AppCorsConfiguration;
+import com.appmusic.filters.RequestLogger;
 
 @SpringBootApplication
 @EnableEurekaClient
+@EnableScheduling
 @ComponentScan("com.appmusic")
 public class PlaylistMicroservice {
 	

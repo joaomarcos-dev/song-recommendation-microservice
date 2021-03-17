@@ -1,6 +1,6 @@
 package com.appmusic.service;
 
-import static org.apache.commons.lang3.ObjectUtils.anyNotNull;
+import static org.apache.commons.lang3.ObjectUtils.allNotNull;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +18,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import com.appmusic.model.TemperatureRange;
+import com.appmusic.model.GenreEnum;
+import com.appmusic.model.TemperatureRangePojo;
 
 @Service
 @PropertySource("classpath:application.properties")
@@ -39,9 +40,9 @@ public class RecommendationService implements EnvironmentAware {
 	
 	private List<String> rangeLimitName;
 	
-	private Map<Genre, TemperatureRange> genreTmpRangeMap = new HashMap<Genre, TemperatureRange>();
+	private Map<GenreEnum, TemperatureRangePojo> genreTmpRangeMap = new HashMap<GenreEnum, TemperatureRangePojo>();
 	
-	public Map<Genre, TemperatureRange> getGenreTmpRangeMap() {
+	public Map<GenreEnum, TemperatureRangePojo> getGenreTmpRangeMap() {
 		return genreTmpRangeMap;
 	}
 
@@ -59,18 +60,25 @@ public class RecommendationService implements EnvironmentAware {
 	private void updateGenreTmpRangeMap() {
 		
 		//not scalable. the last configuration override the earlier
-		for(Genre g : Genre.values()) {
+		for(GenreEnum g : GenreEnum.values()) {
 			
-			TemperatureRange tmpRange = new TemperatureRange();
+			TemperatureRangePojo tmpRange = new TemperatureRangePojo();
 			
 			rangeLimitName.forEach( s -> {
 				
-				String prop = env.getProperty(String.format("appmusic.spotifyapi.genre.%s.tmprange.%s", g.name().toLowerCase(), s));
+				//to enable tests
+				String propname = String.format("appmusic.test.spotifyapi.genre.%s.tmprange.%s", g.name().toLowerCase(), s);
+				
+				if(propname == null) propname = String.format("appmusic.spotifyapi.genre.%s.tmprange.%s", g.name().toLowerCase(), s);
+				
+				String prop = env.getProperty(propname);
+//				LOGGER.info("{} {} {} {}",g.name().toLowerCase(), prop, s, propname);
 				if(prop != null) {	
+					Float temp = Float.valueOf(prop);
 					
 					if(s.contains("to")) {
 						
-						tmpRange.setMaxTmp(Float.valueOf(prop));
+						tmpRange.setMaxTmp(temp);
 						
 						if(s.contains("inclusive")) {
 							
@@ -81,8 +89,8 @@ public class RecommendationService implements EnvironmentAware {
 							tmpRange.setMaxTmpInclusive(false);
 							
 						}
-					}else {
-						tmpRange.setMinTmp(Float.valueOf(prop));
+					}else if(s.contains("from")) {
+						tmpRange.setMinTmp(temp);
 						
 						if(s.contains("inclusive")) {
 							
@@ -100,44 +108,45 @@ public class RecommendationService implements EnvironmentAware {
 			genreTmpRangeMap.put(g, tmpRange);
 		}
 		
-		this.genreTmpRangeMap.forEach((g, t) -> {
-			
+//		this.genreTmpRangeMap.forEach((g, t) -> {
+//			
 //			LOGGER.info(g.toString());
 //			LOGGER.info(t.toString());
-			
-		});
+//			
+//		});
 	}
 	
-	public Genre getRecommendation(Float tmp) {
+	public GenreEnum getRecommendation(Float tmp) {
 		
 		//As we got a small amount of objects
-		for (Entry<Genre, TemperatureRange> gtMap : this.genreTmpRangeMap.entrySet()) {
+		for (Entry<GenreEnum, TemperatureRangePojo> gtMap : this.genreTmpRangeMap.entrySet()) {
 			
 			if(containsTmp(tmp, gtMap.getValue())) {
-				
+
 				return gtMap.getKey();
 			}
+			
 		}
 		return getFallbackGenre();			
 			
 	}
 	
-	private boolean containsTmp(Float tmp, TemperatureRange tmpRange) {
+	private boolean containsTmp(Float tmp, TemperatureRangePojo tmpRange) {
 		Boolean minTest = false;//a priori
 		Boolean maxTest = false;//a priori
 		
-		if(anyNotNull(tmpRange.getMinTmpInclusive(), tmpRange.getMinTmp())){
+		if(allNotNull(tmpRange.getMinTmpInclusive(), tmpRange.getMinTmp())){
 		
 			minTest = (tmpRange.getMinTmpInclusive()) ?
 				tmp >= tmpRange.getMinTmp() :
 				tmp > tmpRange.getMinTmp();
 		}
 		
-		if(anyNotNull(tmpRange.getMaxTmpInclusive(), tmpRange.getMaxTmp())){
+		if(allNotNull(tmpRange.getMaxTmpInclusive(), tmpRange.getMaxTmp())){
 		
 			maxTest = (tmpRange.getMaxTmpInclusive()) ?
-				tmp <= tmpRange.getMinTmp() :
-				tmp < tmpRange.getMinTmp();
+				tmp <= tmpRange.getMaxTmp() :
+				tmp < tmpRange.getMaxTmp();
 		
 		}
 		
@@ -150,7 +159,7 @@ public class RecommendationService implements EnvironmentAware {
 		updateGenreTmpRangeMap();
 	}
 	
-	private Genre getFallbackGenre() {
-		return Genre.valueOf(fallbackGenre.toUpperCase());
+	private GenreEnum getFallbackGenre() {
+		return GenreEnum.valueOf(fallbackGenre.toUpperCase());
 	}
 }

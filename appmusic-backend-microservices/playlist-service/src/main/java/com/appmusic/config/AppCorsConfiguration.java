@@ -1,4 +1,4 @@
-package com.appmusic.microservice.config;
+package com.appmusic.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,15 +26,13 @@ public class AppCorsConfiguration implements WebMvcConfigurer {
 		
 		LOGGER.debug("Adding CORS mapping");
 		
-		String [] methods = allowedMethods.split(" ");
-		
+		String [] methods = allowedMethods.split(".");
+		LOGGER.info(methods.toString());
 		registry
 			.addMapping("/playlist")//applied to all
 			.allowedMethods(methods)
-			.allowedOriginPatterns(clientURL)
+			.allowedOrigins(clientURL)
 			.exposedHeaders(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)
-			.exposedHeaders(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS)
-			.exposedHeaders(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS)
 			;
 	}
 
