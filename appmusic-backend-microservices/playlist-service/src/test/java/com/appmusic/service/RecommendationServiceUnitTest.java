@@ -15,7 +15,7 @@ import com.appmusic.model.GenreEnum;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@TestPropertySource(locations="classpath:test.properties", inheritLocations=false)
+@TestPropertySource(locations="classpath:properties/test.properties", inheritLocations=false)
 public class RecommendationServiceUnitTest {
 	
 	Logger LOGGER = LoggerFactory.getLogger(this.getClass());

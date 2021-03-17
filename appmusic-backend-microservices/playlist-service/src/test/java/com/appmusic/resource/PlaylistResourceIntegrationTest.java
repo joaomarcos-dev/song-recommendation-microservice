@@ -23,7 +23,7 @@ import com.google.common.net.HttpHeaders;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@TestPropertySource("classpath:test.properties")
+@TestPropertySource("classpath:properties/test.properties")
 public class PlaylistResourceIntegrationTest {
 	
 	Logger LOGGER = LoggerFactory.getLogger(this.getClass());

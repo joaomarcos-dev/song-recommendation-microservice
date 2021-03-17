@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.TestPropertySource;
 
 @Configuration
-@TestPropertySource("classpath:test.properties")
+@TestPropertySource("classpath:properties/test.properties")
 @ConfigurationProperties(prefix = "appmusic.test.resouce.playlist")
 public class PlaylistResourceIntTestConfig {
 	

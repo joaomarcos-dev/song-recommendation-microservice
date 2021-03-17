@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- Importing Spring Configuration -->
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	
+	<!-- Import spring properties -->
+	<property resource="properties/application.properties" />
+	
+	<!-- A kind of logger the logs everything not specified in the name attribute of a explicitly defined <logger> -->
+	<logger name="org.springframework.web" level="DEBUG"/>
+	
+	<!-- APPENDERS -->
+	
+	
+	<appender name="DBAppenderPostgres" class="ch.qos.logback.classic.db.DBAppender">
+	    <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+	      <driverClass>${appmusic.datasource.postgres.jdbcdriver}</driverClass>
+	      <url>jdbc:postgresql://${appmusic.datasource.postgres.host}:${appmusic.datasource.postgres.host.port}/${appmusic.datasource.postgres.database}</url>
+	      <user>${appmusic.datasource.postgres.username}</user>
+	      <password>${appmusic.datasource.postgres.password}</password>
+	    </connectionSource>
+  	</appender> -->
+
+	
+	<!-- Means that for all the classes specified in name attribute, We will 
+		log DEBUG information for the registered APPENDERS -->
+	<logger name="RequestLogger" level="trace">
+		<appender-ref ref="DBAppenderPostgres"/>		
+	</logger>
+	
+</configuration>

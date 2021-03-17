@@ -22,7 +22,7 @@ import com.appmusic.model.GenreEnum;
 import com.appmusic.model.TemperatureRangePojo;
 
 @Service
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:properties/application.properties")
 public class RecommendationService implements EnvironmentAware {
 	
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
@@ -67,12 +67,19 @@ public class RecommendationService implements EnvironmentAware {
 			rangeLimitName.forEach( s -> {
 				
 				//to enable tests
-				String propname = String.format("appmusic.test.spotifyapi.genre.%s.tmprange.%s", g.name().toLowerCase(), s);
 				
-				if(propname == null) propname = String.format("appmusic.spotifyapi.genre.%s.tmprange.%s", g.name().toLowerCase(), s);
+				  String propname =
+				  String.format("appmusic.test.spotifyapi.genre.%s.tmprange.%s",
+				  g.name().toLowerCase(), s);
+				  
+				  if(propname == null) propname =
+				  String.format("appmusic.spotifyapi.genre.%s.tmprange.%s",
+				  g.name().toLowerCase(), s);
 				
 				String prop = env.getProperty(propname);
+				
 //				LOGGER.info("{} {} {} {}",g.name().toLowerCase(), prop, s, propname);
+				
 				if(prop != null) {	
 					Float temp = Float.valueOf(prop);
 					

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebMvc
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:properties/application.properties")
 public class AppCorsConfiguration implements WebMvcConfigurer {
 	
 	Logger LOGGER  = LoggerFactory.getLogger(this.getClass());

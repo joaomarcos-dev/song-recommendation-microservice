@@ -9,18 +9,22 @@
 	
 	<!-- APPENDERS -->
 	
-	<appender name="DBAppenderExt" class="ch.qos.logback.classic.db.DBAppender">
+	<appender name="DBAppenderPostgres" class="ch.qos.logback.classic.db.DBAppender">
+	    <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+	      <driverClass>org.postgresql.Driver</driverClass>
+	      <url>jdbc:postgresql://localhost:5432/appmusic</url>
+	      <user>postgres</user>
+	      <password>root123</password>
+	    </connectionSource>
+  	</appender>
+  	
+  	<appender name="DBAppenderMysql" class="ch.qos.logback.classic.db.DBAppender">
 	    <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
 	      <driverClass>com.mysql.cj.jdbc.Driver</driverClass>
-	      <url>jdbc:mysql://localhost:3306/microservice?useTimezone=true&amp;serverTimezone=UTC</url>
+	      <url>jdbc:mysql://localhost:3306/microseervice?useTimezone=true&amp;serverTimezone=UTC</url>
 	      <user>root</user>
 	      <password>a394b@</password>
 	    </connectionSource>
-	   	<!-- <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-	      <layout class="ch.qos.logback.classic.PatternLayout">
-	        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-	      </layout>
-	    </encoder> -->
   	</appender>
   	
 	<!-- LOGGERS -->
@@ -28,7 +32,8 @@
 	<!-- Means that for all the classes specified in name attribute, We will 
 		log DEBUG information for the registered APPENDERS -->
 	<logger name="RequestLogger" level="trace">
-		<appender-ref ref="DBAppenderExt"/>						
+		<appender-ref ref="DBAppenderPostgres"/>
+		<appender-ref ref="DBAppenderMysql"/>						
 	</logger>
 	
 </configuration>

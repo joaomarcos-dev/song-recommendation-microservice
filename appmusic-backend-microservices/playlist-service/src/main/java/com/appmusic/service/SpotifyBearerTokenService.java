@@ -24,7 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import com.appmusic.model.SpotifyBearerTokenPojo;
 
 @Service
-@PropertySource("classpath:sensitive.properties")
+@PropertySource("classpath:properties/sensitive.properties")
 public class SpotifyBearerTokenService {
 	
 	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());

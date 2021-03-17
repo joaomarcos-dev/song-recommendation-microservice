@@ -13,8 +13,8 @@ import com.appmusic.model.WeatherPojo;
 
 @Service
 @PropertySources({
-    @PropertySource("classpath:application.properties"),
-    @PropertySource("classpath:sensitive.properties")
+    @PropertySource("classpath:properties/application.properties"),
+    @PropertySource("classpath:properties/sensitive.properties")
 })
 public class WeatherService {
 	

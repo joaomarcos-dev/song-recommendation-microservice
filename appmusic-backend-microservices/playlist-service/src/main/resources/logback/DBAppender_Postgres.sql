@@ -1,23 +1,22 @@
-# Logback: the reliable, generic, fast and flexible logging framework.
-# Copyright (C) 1999-2010, QOS.ch. All rights reserved.
-#
-# See http://logback.qos.ch/license.html for the applicable licensing 
-# conditions.
+-- Logback: the reliable, generic, fast and flexible logging framework.
+-- Copyright (C) 1999-2010, QOS.ch. All rights reserved.
+--
+-- See http://logback.qos.ch/license.html for the applicable licensing 
+-- conditions.
 
-# This SQL script creates the required tables by ch.qos.logback.classic.db.DBAppender.
-#
-# It is intended for MySQL databases. It has been tested on MySQL 5.1.37 
-# on Linux
+-- This SQL script creates the required tables by ch.qos.logback.classic.db.DBAppender
+--
+-- It is intended for PostgreSQL databases.
 
-
-BEGIN;
-DROP TABLE IF EXISTS logging_event_property;
-DROP TABLE IF EXISTS logging_event_exception;
-DROP TABLE IF EXISTS logging_event;
-COMMIT;
+DROP TABLE    logging_event_property;
+DROP TABLE    logging_event_exception;
+DROP TABLE    logging_event;
+DROP SEQUENCE logging_event_id_seq;
 
 
-BEGIN;
+CREATE SEQUENCE logging_event_id_seq MINVALUE 1 START 1;
+
+
 CREATE TABLE logging_event 
   (
     timestmp         BIGINT NOT NULL,
@@ -34,22 +33,18 @@ CREATE TABLE logging_event
     caller_class      VARCHAR(254) NOT NULL,
     caller_method     VARCHAR(254) NOT NULL,
     caller_line       CHAR(4) NOT NULL,
-    event_id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
+    event_id          BIGINT DEFAULT nextval('logging_event_id_seq') PRIMARY KEY
   );
-COMMIT;
 
-BEGIN;
 CREATE TABLE logging_event_property
   (
     event_id	      BIGINT NOT NULL,
     mapped_key        VARCHAR(254) NOT NULL,
-    mapped_value      TEXT,
+    mapped_value      VARCHAR(1024),
     PRIMARY KEY(event_id, mapped_key),
     FOREIGN KEY (event_id) REFERENCES logging_event(event_id)
   );
-COMMIT;
 
-BEGIN;
 CREATE TABLE logging_event_exception
   (
     event_id         BIGINT NOT NULL,
@@ -58,4 +53,3 @@ CREATE TABLE logging_event_exception
     PRIMARY KEY(event_id, i),
     FOREIGN KEY (event_id) REFERENCES logging_event(event_id)
   );
-COMMIT;

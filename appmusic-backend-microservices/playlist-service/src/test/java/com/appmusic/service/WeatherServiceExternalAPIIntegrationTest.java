@@ -17,7 +17,7 @@ import com.appmusic.model.WeatherPojo;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@TestPropertySource("classpath:test.properties")
+@TestPropertySource("classpath:properties/test.properties")
 public class WeatherServiceExternalAPIIntegrationTest {
 	
 	Logger LOGGER = LoggerFactory.getLogger(this.getClass());

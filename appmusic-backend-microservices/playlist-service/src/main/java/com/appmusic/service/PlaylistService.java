@@ -22,7 +22,7 @@ import com.appmusic.model.PlaylistPojo;
 import com.appmusic.model.SpotifyBearerTokenPojo;
 
 @Service
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:properties/application.properties")
 public class PlaylistService {
 	
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
