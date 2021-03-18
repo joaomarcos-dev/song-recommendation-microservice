@@ -1,0 +1,40 @@
+//USES AND IMPORTS
+@use 'typography' as typo;
+@use 'colors' as colors;
+
+//USES AND IMPORTS
+
+*{
+  font-family: typo.$font;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background-color: lighten(colors.$primary_color, 45);
+  margin: 0;
+
+  ul{
+    list-style: none;
+  }
+  a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+  }
+
+}
+
+.class_div_footer{
+  position: absolute;
+  bottom: 0
+}
+
+.class_img_main-logo{
+  height: 40px;
+}
+
+//Styling header
+
+.global_class_header_header {
+
+}

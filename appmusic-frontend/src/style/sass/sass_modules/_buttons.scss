@@ -1,0 +1,48 @@
+//File description:This is a Partial file for defining stuff for out project
+
+@mixin general_btn( $btn_size: 3, $btn_background-color: green ){
+    cursor: pointer !important;
+    box-sizing: content-box;
+    padding: 1ex 1ex;
+    height: 2ex*$btn_size;
+    // width: 2ex*$btn_size*4;s
+    background-color: $btn_background-color;
+
+    border: 1px solid transparent;
+
+    //Centering text
+    text-align: center;
+
+    transition: all .5s;
+
+}
+
+@mixin btn-retangular_b1( $btn_size: 3, $btn_background-color: green ){
+    @include general_btn($btn_size:$btn_size, $btn_background-color:$btn_background-color);
+    $border-radius: 1.5px;
+    border-radius: $border-radius*$btn_size ;
+}
+
+@mixin btn-rounded_b1( $btn_size: 3, $btn_background-color: green ){
+  @include general_btn($btn_size:$btn_size, $btn_background-color:$btn_background-color);
+  height: 1ex*$btn_size;
+  width: auto;
+  border-radius: 40ex !important;
+}
+
+@mixin appealing_button_01( $btn_size: 3, $btn_background-color: green, $btn_color: white, ){
+  @include btn-rounded_b1($btn_size:$btn_size, $btn_background-color:$btn_background-color);
+  border: none;
+  color: $btn_color;
+}
+@mixin on-hover_invert_button_01($btn_background-color_01: green, $btn_background-color_02: white, ){
+    border: 1px solid $btn_background-color_01;
+    background-color: $btn_background-color_02;
+    color: $btn_background-color_01;
+}
+@mixin on-focus_outline_button_01($btn_outline-color: green, $btn_outline-style: dotted){
+    outline: 2px $btn_outline-style darken($btn_outline-color, 5);
+}
+@mixin on-active_change-color_button($btn_background-color: green){
+    background-color: darken($btn_background-color, 10)
+}
