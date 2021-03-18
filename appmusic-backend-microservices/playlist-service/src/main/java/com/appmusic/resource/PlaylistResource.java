@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appmusic.model.GenreEnum;
 import com.appmusic.model.PlaylistPojo;
 import com.appmusic.model.WeatherPojo;
+import com.appmusic.model.exception.IncorrectSyntaxException;
 import com.appmusic.service.PlaylistService;
 import com.appmusic.service.RecommendationService;
 import com.appmusic.service.WeatherService;
@@ -47,6 +48,8 @@ public class PlaylistResource {
 		}else if (!anyNull(cityName)){
 			
 			wp = weatherService.fetchWeatherByCityName(cityName);
+		}else {
+			throw new IncorrectSyntaxException();
 		}
 		
 		GenreEnum genre = recommendationService.getRecommendation(wp.getTemperature());

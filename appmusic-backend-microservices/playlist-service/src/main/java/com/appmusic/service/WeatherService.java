@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.appmusic.model.WeatherPojo;
+import com.appmusic.model.exception.CityNotFoundException;
 
 @Service
 @PropertySources({
@@ -36,20 +39,41 @@ public class WeatherService {
 	public WeatherPojo fetchWeatherByCoodinates(Double latitude, Double longitude) {
 		
 		LOGGER.trace(String.format("fetch weather by coodinates for latitude {} and longitude {}", latitude, longitude));
+		WeatherPojo wp;
 		
-		WeatherPojo wp = restTemplate.getForObject(String.format("%s/weather?lat=%s&lon=%s&appid=%s", openWeatherBaseUrl, latitude, longitude, apiId), WeatherPojo.class);
+		try {
+			ResponseEntity<WeatherPojo> re = restTemplate.getForEntity(String.format("%s/weather?lat=%s&lon=%s&appid=%s", openWeatherBaseUrl, latitude, longitude, apiId), WeatherPojo.class);
+			wp =  re.getBody();
+			
+		}catch(RestClientException rce) {
+			//pretty simple
+			throw new CityNotFoundException();
+		}
 		
 		return wp;
 		
 	}	
 	
+	
+	
 	public WeatherPojo fetchWeatherByCityName(String cityName) {
 		
 		LOGGER.debug("Featching weather by city {}", cityName);
-		
 		String url = String.format("%s/weather?appid=%s&q=%s", openWeatherBaseUrl, apiId, cityName);
 		
-		return restTemplate.getForObject(url, WeatherPojo.class);
+		WeatherPojo wp;
+		
+		try {
+			
+			ResponseEntity<WeatherPojo> re = restTemplate.getForEntity(url, WeatherPojo.class);
+			wp =  re.getBody();
+			
+		}catch(RestClientException rce) {
+			//pretty simple
+			throw new CityNotFoundException();
+		}
+		
+		return wp;
 		
 	}
 	

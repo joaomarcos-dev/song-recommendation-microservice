@@ -15,11 +15,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.appmusic.model.GenreEnum;
 import com.appmusic.model.PlaylistPojo;
 import com.appmusic.model.SpotifyBearerTokenPojo;
+import com.appmusic.model.WeatherPojo;
+import com.appmusic.model.exception.CityNotFoundException;
+import com.appmusic.model.exception.InternalErrorException;
 
 @Service
 @PropertySource("classpath:properties/application.properties")
@@ -54,7 +58,17 @@ public class PlaylistService {
 		//Request
 		RequestEntity<PlaylistPojo> requestEntity = new RequestEntity<PlaylistPojo>(headers, HttpMethod.GET, uri);
 		
-		ResponseEntity<PlaylistPojo> response = restTemplate.exchange(requestEntity, PlaylistPojo.class);
+		ResponseEntity<PlaylistPojo> response;
+		
+		
+		try {
+			
+			response = restTemplate.exchange(requestEntity, PlaylistPojo.class);
+			
+		}catch(RestClientException rce) {
+			//pretty simple
+			throw new InternalErrorException();
+		}
 
 		return response.getBody();
 	}
