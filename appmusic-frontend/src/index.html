@@ -1,0 +1,44 @@
+<html lang="pt-BR" ng-app="playlistModule" >
+	<head>
+
+		@@include_once('src/includes/general/general-includes.html')
+
+		@@include_once('src/includes/general/seo-includes.html')
+
+		@@include_once('src/includes/general/script-includes.html')
+
+		@@include_once('src/includes/general/styleseet-includes.html')
+
+	</head>
+
+	<body ng-controller="playlistController">
+
+		@@include_once('src/includes/general/header-includes.html')
+
+		 <md-content>
+
+			<md-input-container class="md-block" flex-gt-sm>
+        <label>Nome da cidade</label>
+        <input ng-model="cityName">
+      </md-input-container>
+			<md-button  class="md-raised md-primary" ng-click="getPlaylist(cityName)">Find good song</md-button>
+			<md-progress-circular md-mode="indeterminate" ng-disabled="resultsFetched" ng-if="!resultsFetched"></md-progress-circular>
+			<md-list flex>
+			        <md-list-item href="https://www.youtube.com/search?q={{track.name}}"class="md-3-line" ng-repeat="track in playlist.songList" ng-click="null">
+			          <div class="md-list-item-text" layout="column">
+			            <h3>{{ track.name}}</h3>
+			          </div>
+			        </md-list-item>
+			        <md-divider ></md-divider>
+			      </md-list>
+		</md-content>
+
+
+
+		<!-- FOOTER -->
+		@@include_once('src/includes/general/footer-includes.html')
+
+		@@include_once('src/includes/general/bottom-script-includes.html')
+
+	</body>
+</html>

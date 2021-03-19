@@ -1,0 +1,92 @@
+/*
+This file has the puporse of defining the style for
+the components according to the style guide definitiions
+*/
+//USES AND IMPORTS
+@use 'standardized_style_properties' as std_prop;
+@use 'buttons' as btn;
+@use 'colors' as colors;
+@use 'typography' as typo;
+
+$font: typo.$font;
+/*-----------------------FORMATING BUTTON RESOLUTION--------------------------*/
+
+button, .button, button:not(.md-button), .ndc-button
+{
+  @include btn.btn-retangular_b1($btn_size:2);
+  font-family: $font;
+  background-color: colors.$primary_color;
+  transition: all 0.5s;
+
+  &:hover{
+    @include btn.on-hover_invert_button_01($btn_background-color_01:colors.$primary_color , $btn_background-color_02: white);
+  }
+  &:focus{
+    outline: 2px dotted darken(colors.$primary_color, 5);
+  }
+  &:active{
+    @include btn.on-active_change-color_button($btn_background-color: colors.$primary_color)
+  }
+  &.btn_waiting{}
+}
+
+/*-----------------------FORMATING FORM RESOLUTION--------------------------*/
+@mixin form($box-shadow-color: grey){
+  $font_h: 20px;
+    box-shadow: 1px 1px 10px lighten($box-shadow-color, 20);
+    font-family: $font;
+    background-color: lighten(colors.$primary_color, 30);
+    @include std_prop.padding;
+
+    input, button{
+      font-size:$font_h*0.9;
+      box-sizing: content-box;
+      border: 1px solid transparent;
+
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+
+      width: 95%;
+      height: 30px;
+      padding: 0.5ex 0.5ex;
+      @include std_prop.border-radius(0.5);
+    }
+
+    //The label for each section of the form
+    h1{
+      font-size:$font_h;
+      font-weight: lighter;
+      // text-decoration: underline;
+    }
+    h2{
+      font-size:$font_h*0.8;
+    }
+}
+// -----------------FORMATING TYPOGRAPHIC ----------------
+
+h1{
+  font-family: $font;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+h2{
+  font-family: $font;
+  font-size: 25px;
+}
+
+h3{
+  font-family: $font;
+  font-size: 20px;
+}
+
+h4{
+  font-family: $font;
+  font-size: 17px;
+}
+
+h5{
+  font-family: $font;
+  font-size: 13px;
+}

@@ -1,0 +1,45 @@
+  $font: Mulish;
+
+$font-size5:5em;
+$font-size4:4em;
+$font-size3:3em;
+$font-size2:2em;
+$font-size1:1em;
+
+  :root{
+
+  	--font-size5:2.8vw;
+  	--font-size4:2.4vw;
+  	--font-size3:2.0vw;
+  	--font-size2:1.6vw;
+  	--font-size1:1.2vw;
+  }
+
+  body{
+    font-family: $font !important;
+    font-weight: 200;
+    font-size: 20px;
+    color: #2f363d;
+  }
+
+  //Headline
+  h1{
+    font-weight: bold;
+    font-size: 1.5rem
+  }
+  h2{
+    font-size: 1.25rem
+  }
+  h3{
+    font-size: 1rem
+  }
+  h4{
+    font-size: 0.9rem
+  }
+  h5{
+    font-size: 0.8rem
+  }
+
+  p{
+    font-size: 1rem;
+  }
