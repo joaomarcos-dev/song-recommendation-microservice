@@ -1,4 +1,4 @@
-# Avaliação Java - Camada de serviço para pseudo loja de games
+# Avaliação Java - Frontend para microserviço de sugestão de músicas
 
 ## Descrição
 
@@ -6,11 +6,11 @@
 
 ## Como executar os testes do build
 
-  O projeto utiliza o Maven Wrapper, o que quer dizer que não será necessário a instalação do Maven na máquina, uma vez que a ferramenta é instalado em um diretório local ao projeto. Utilize o comando `mvnw clean test` para a execução da fase de testes.
+O projeto utiliza o Maven Wrapper, o que quer dizer que não será necessário a instalação do Maven na máquina, uma vez que a ferramenta é instalado em um diretório local ao projeto. Dentro do diretório `song-recomendation-microservice\appmusic-backend-microservices\playlist-service`, utilize o comando `mvnw clean test` para a execução da fase de testes. O teste gerará mensagens de erro se o microservice registry não estiver up, no entanto nenhum dos testes devem falhar, devido à utilização do mockmvc.
 
 ## Como executar os testes de produção
 
-Para a execução de testes nos endpoints, poderá ser utilizada a ferramenta Postman, Curl ou o próprio navegador.
+Para a execução de testes nos endpoints, poderá ser utilizada a ferramenta Postman, Curl ou o próprio navegador. Execute o também o microservice registry localizado em `song-recomendation-microservice\appmusic-backend-microservices\app-service-registry` ou remova a anotação \@EnableEurekaClient para a execução do microserviço. 
 Após rodar o comando `mvnw clean package`, execute `java -jar target/suggestion-microservice.jar` da pasta `target` que será gerada. Após a inicialização da aplicação, o endpoint `/playlist` já estará disponíveis para responder às requisições.
 
 ## Endpoints
