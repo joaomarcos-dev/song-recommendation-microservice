@@ -38,11 +38,11 @@ public class PlaylistResource {
 			@QueryParam("latitude") Double latitude,	
 			@QueryParam("longitude") Double longitude,
 			@QueryParam("cityName") String cityName,
-			@RequestParam (name = "orderBy", defaultValue="name") String orderBy
+			@RequestParam (name = "orderBy", defaultValue="name") String orderBy,
+			@RequestParam (name = "limit", defaultValue="20") Integer limit,
+			@RequestParam (name = "offset", defaultValue="0") Integer offset
  			) throws URISyntaxException {
 		
-//		//Defaults
-//		orderBy = "name";
 		
 		WeatherPojo wp = null;
 		
@@ -58,7 +58,11 @@ public class PlaylistResource {
 		}
 		
 		GenreEnum genre = recommendationService.getRecommendation(wp.getTemperature());
+		
+		PlaylistPojo pp = playlistService.playlistByGenre(genre, orderBy);
+		
+		PlaylistService.paginate(limit, offset, pp);
 			
-		return playlistService.playlistByGenre(genre, orderBy);
+		return pp;
 	}
 }

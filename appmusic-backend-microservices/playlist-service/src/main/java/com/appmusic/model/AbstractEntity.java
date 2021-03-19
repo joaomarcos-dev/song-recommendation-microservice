@@ -1,13 +1,17 @@
 package com.appmusic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //@MappedSuperclass
 //@JsonbNillable
 public abstract class AbstractEntity {
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	public Integer id;
 
 //	@Version
+	@JsonIgnore
 	public Integer version;
 
 	/* CONSTRUCTORS */
