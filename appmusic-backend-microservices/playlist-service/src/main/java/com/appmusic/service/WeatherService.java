@@ -78,6 +78,13 @@ public class WeatherService {
 	}
 	
 	public static Float fromKelvinToCelsius(Float kelvin) {
+		
+		Logger LOGGER = LoggerFactory.getLogger(WeatherService.class);
+		
+		Float result = kelvin - Float.valueOf("273.15");
+		
+		LOGGER.info("Converting from {} Kelvin to {} Celsius", kelvin, result);
+		
 		return kelvin - Float.valueOf("273.15");
 	}
 

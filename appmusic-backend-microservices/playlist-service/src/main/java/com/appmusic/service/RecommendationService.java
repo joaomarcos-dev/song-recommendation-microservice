@@ -54,6 +54,7 @@ public class RecommendationService implements EnvironmentAware {
 			GREATER_INCLUSIVE_LIMIT,
 			GREATER_EXCLUSE_LIMIT
 		));
+		
 	
 	}
 
@@ -67,21 +68,27 @@ public class RecommendationService implements EnvironmentAware {
 			rangeLimitName.forEach( s -> {
 				
 				//to enable tests
+				String propname;
+				if(Boolean.valueOf(env.getProperty("appmusic.test"))) {
+					
+					LOGGER.info("Loading test properties");
+					propname = String.format("appmusic.test.spotifyapi.genre.%s.tmprange.%s", g.name().toLowerCase(), s);
+				}
+				else {  
+					
+					LOGGER.info("Loading production properties");
+					propname = String.format("appmusic.spotifyapi.genre.%s.tmprange.%s", g.name().toLowerCase(), s);
+				}
 				
-				  String propname =
-				  String.format("appmusic.test.spotifyapi.genre.%s.tmprange.%s",
-				  g.name().toLowerCase(), s);
-				  
-				  if(propname == null) propname =
-				  String.format("appmusic.spotifyapi.genre.%s.tmprange.%s",
-				  g.name().toLowerCase(), s);
+				String propvalue = env.getProperty(propname);
+				 
+				if(propvalue != null)
+   			    LOGGER.info("Getting prop {} from enviroment: {} ", propname, propvalue);
 				
-				String prop = env.getProperty(propname);
+				LOGGER.info("{} {} {} {}",g.name().toLowerCase(), propvalue, s, propname);
 				
-//				LOGGER.info("{} {} {} {}",g.name().toLowerCase(), prop, s, propname);
-				
-				if(prop != null) {	
-					Float temp = Float.valueOf(prop);
+				if(propvalue != null) {	
+					Float temp = Float.valueOf(propvalue);
 					
 					if(s.contains("to")) {
 						
@@ -115,32 +122,46 @@ public class RecommendationService implements EnvironmentAware {
 			genreTmpRangeMap.put(g, tmpRange);
 		}
 		
-//		this.genreTmpRangeMap.forEach((g, t) -> {
-//			
-//			LOGGER.info(g.toString());
-//			LOGGER.info(t.toString());
-//			
-//		});
+		this.genreTmpRangeMap.forEach((g, t) -> {
+			
+			LOGGER.info(g.toString());
+			LOGGER.info(t.toString());
+			
+		});
 	}
 	
 	public GenreEnum getRecommendation(Float tmp) {
+		
+		LOGGER.info("Getting recommendation for temperature {}", tmp);
+		
+		GenreEnum geRecommended = null;
 		
 		//As we got a small amount of objects
 		for (Entry<GenreEnum, TemperatureRangePojo> gtMap : this.genreTmpRangeMap.entrySet()) {
 			
 			if(containsTmp(tmp, gtMap.getValue())) {
+				LOGGER.info("Matching genre {}", gtMap.getValue());
 
-				return gtMap.getKey();
+				geRecommended =  gtMap.getKey();
+				break;
 			}
 			
 		}
-		return getFallbackGenre();			
+		
+		if(geRecommended == null ) {
+			LOGGER.info("Falling back to the default genre");
+			geRecommended = getFallbackGenre();
+		}    
+		
+		return geRecommended;
 			
 	}
 	
 	private boolean containsTmp(Float tmp, TemperatureRangePojo tmpRange) {
 		Boolean minTest = false;//a priori
 		Boolean maxTest = false;//a priori
+		
+		LOGGER.info("Checking if tmp {} is in the temperature range {}", tmp, tmpRange);
 		
 		if(allNotNull(tmpRange.getMinTmpInclusive(), tmpRange.getMinTmp())){
 		

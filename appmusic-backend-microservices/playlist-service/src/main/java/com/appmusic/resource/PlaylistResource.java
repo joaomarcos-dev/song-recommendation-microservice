@@ -9,6 +9,7 @@ import javax.ws.rs.QueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appmusic.model.GenreEnum;
@@ -27,7 +28,7 @@ public class PlaylistResource {
 	private WeatherService weatherService;
 	
 	@Autowired
-	private PlaylistService spotifyPlaylistService;
+	private PlaylistService playlistService;
 	
 	@Autowired
 	private RecommendationService recommendationService;
@@ -36,8 +37,12 @@ public class PlaylistResource {
 	public PlaylistPojo getPlaylistSuggestion(
 			@QueryParam("latitude") Double latitude,	
 			@QueryParam("longitude") Double longitude,
-			@QueryParam("cityName") String cityName
+			@QueryParam("cityName") String cityName,
+			@RequestParam (name = "orderBy", defaultValue="name") String orderBy
  			) throws URISyntaxException {
+		
+		//Defaults
+		orderBy = "name";
 		
 		WeatherPojo wp = null;
 		
@@ -54,6 +59,6 @@ public class PlaylistResource {
 		
 		GenreEnum genre = recommendationService.getRecommendation(wp.getTemperature());
 			
-		return spotifyPlaylistService.playlistByGenre(genre);
+		return playlistService.playlistByGenre(genre, orderBy);
 	}
 }

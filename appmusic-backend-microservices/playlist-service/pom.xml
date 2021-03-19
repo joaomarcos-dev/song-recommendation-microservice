@@ -99,6 +99,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>suggestion-microservice</finalName>	
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

@@ -2,6 +2,7 @@ package com.appmusic.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,9 @@ import com.appmusic.model.GenreEnum;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@TestPropertySource(locations="classpath:properties/test.properties", inheritLocations=false)
+@TestPropertySource(locations="classpath:properties/test.properties")
+//, inheritLocations=false)
+//@Disabled
 public class RecommendationServiceUnitTest {
 	
 	Logger LOGGER = LoggerFactory.getLogger(this.getClass());

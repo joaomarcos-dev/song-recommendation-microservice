@@ -1,5 +1,6 @@
 package com.appmusic.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -69,9 +70,21 @@ public class WeatherServiceExternalAPIIntegrationTest {
 		
 		assertNotNull(weatherPojo.getTemperature());
 		
-		//Asserting the temperature value is greater than 0 Kelvin
-		assertFalse(weatherPojo.getTemperature().compareTo(Float.valueOf("-273.23")) <= 0);
 		
-				
+	}
+	
+	@Test
+	public void testingConvertionPrecision() throws Exception {
+		
+		//Asserting temperature conversion precision
+		//tabulated values
+
+		assertEquals(Float.valueOf(5), WeatherService.fromKelvinToCelsius(Float.valueOf("278.15")));
+
+		assertEquals(Float.valueOf(10), WeatherService.fromKelvinToCelsius(Float.valueOf("283.15")));
+
+		assertEquals(Float.valueOf(-5), WeatherService.fromKelvinToCelsius(Float.valueOf("268.15")));
+		
+		
 	}
 }
