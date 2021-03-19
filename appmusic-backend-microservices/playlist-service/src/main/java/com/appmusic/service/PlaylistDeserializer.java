@@ -17,9 +17,6 @@ public class PlaylistDeserializer extends StdDeserializer<PlaylistPojo> {
 	
 	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public PlaylistDeserializer() { 
@@ -30,8 +27,6 @@ public class PlaylistDeserializer extends StdDeserializer<PlaylistPojo> {
         super(vc); 
     }
 	
-
-
 	@Override
 	public PlaylistPojo deserialize(JsonParser jsonParser, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
@@ -41,9 +36,7 @@ public class PlaylistDeserializer extends StdDeserializer<PlaylistPojo> {
 		PlaylistPojo pp = new PlaylistPojo();
 		
 		jsonNode.get("tracks").forEach(jn -> {
-			
-//			LOGGER.info(jn.get("name").toPrettyString());
-			
+
 			TrackPojo tp = new TrackPojo();
 			
 			tp.setName(jn.get("name").textValue());

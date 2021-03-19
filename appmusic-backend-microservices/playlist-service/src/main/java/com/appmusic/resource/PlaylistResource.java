@@ -41,8 +41,8 @@ public class PlaylistResource {
 			@RequestParam (name = "orderBy", defaultValue="name") String orderBy
  			) throws URISyntaxException {
 		
-		//Defaults
-		orderBy = "name";
+//		//Defaults
+//		orderBy = "name";
 		
 		WeatherPojo wp = null;
 		

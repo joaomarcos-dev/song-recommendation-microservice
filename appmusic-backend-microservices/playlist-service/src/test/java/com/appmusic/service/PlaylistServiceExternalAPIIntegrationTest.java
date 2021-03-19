@@ -40,7 +40,7 @@ public class PlaylistServiceExternalAPIIntegrationTest {
 		
 		for(GenreEnum genre : GenreEnum.values()) {
 			
-			PlaylistPojo playlistPojo  = playlistService.playlistByGenre(genre);
+			PlaylistPojo playlistPojo  = playlistService.playlistByGenre(genre, "name");
 			
 			LOGGER.info("Requesting Spotify for genre {} returned {} songs:", genre.name(), playlistPojo.getSongList().size());
 			
