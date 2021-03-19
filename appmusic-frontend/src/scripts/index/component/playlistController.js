@@ -1,7 +1,7 @@
 //CONTROLLERS
 
-app.controller("playlistController", ['$scope', '$log', 'playlistService', '$mdDialog', playlistControllerFunction]);
-function playlistControllerFunction ($scope, $log, playlistService, $mdDialog){
+app.controller("playlistController", ['$scope', '$log', 'playlistService', '$mdDialog', 'playlistApiErrorService', playlistControllerFunction]);
+function playlistControllerFunction ($scope, $log, playlistService, $mdDialog, playlistApiErrorService){
 
   $log.debug(`playlistControllerFunction()`);
 
@@ -38,23 +38,16 @@ function playlistControllerFunction ($scope, $log, playlistService, $mdDialog){
     $scope.resultsFetched = true;
     $log.debug(`Progress circular bar disabled: ${$scope.resultsFetched}`)
 
-    showErrorDialog ();
     $log.debug(`Showing error dialog`);
 
+    showErrorDialog (`error_${response.status}`);
 
     $log.debug(`failureCb(response)`);
   }
 
-  const showErrorDialog =   function showErrorDialog (ev) {
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('#popupContainer')))
-        .clickOutsideToClose(true)
-        .title('Error')
-        .textContent('We didn\'t find any results for the seach. Try using other terms:/')
-        .ok('Got it!')
-        .targetEvent(ev)
-    );
+  const showErrorDialog =   function showErrorDialog (errorName) {
+    $mdDialog.show(playlistApiErrorService.getError(errorName));
+
   };
 
 

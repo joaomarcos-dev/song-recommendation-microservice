@@ -21,7 +21,7 @@
         <label>Nome da cidade</label>
         <input ng-model="cityName">
       </md-input-container>
-			<md-button ng-click="getPlaylist(cityName)">Find good song</md-button>
+			<md-button  class="md-raised md-primary" ng-click="getPlaylist(cityName)">Find good song</md-button>
 			<md-progress-circular md-mode="indeterminate" ng-disabled="resultsFetched" ng-if="!resultsFetched"></md-progress-circular>
 			<md-list flex>
 			        <md-list-item href="https://www.youtube.com/search?q={{track.name}}"class="md-3-line" ng-repeat="track in playlist.songList" ng-click="null">

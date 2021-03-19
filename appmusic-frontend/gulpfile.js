@@ -34,7 +34,7 @@
     //So test can be done in another host calling my computer in the backend
     //Error prone if the router give me another ip address
     "${apiUrl}":"http://127.0.0.1:8084",
-    "${frontendHostname}":"127.0.0.1"
+    "${frontendHostname}":"http://192.168.0.104:3000"
   }
 
 //PLUGIN CONFIGURATION
