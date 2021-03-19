@@ -49,7 +49,7 @@ Por meio dos endpoints descritos abaixo, é possível interagir com as resouces.
 
 Java 8 instalado na máquina.
 
-Para que o log de requisições funcione corretamente, o banco de dados `appmusic` deve ter as tabelas do script [DBAppender_Postgres.sql](./src/main/resources/logback/DBAppender_Postgres.sql) criadas. Além disso, informações de acesso ao banco devem ser supridas no arquivo [logback-spring.xml](./playlist-service/src/main/resources/logback-spring.xml).
+Para que o log de requisições funcione corretamente, o banco de dados `appmusic` deve ter as tabelas do script [DBAppender_Postgres.sql](./src/main/resources/logback/DBAppender_Postgres.sql) criadas. Além disso, informações de acesso ao banco devem ser supridas no arquivo [logback-spring.xml](./src/main/resources/logback-spring.xml).
 
 ## Notas sobre o projeto
 
