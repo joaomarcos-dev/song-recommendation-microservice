@@ -10,7 +10,7 @@ O projeto utiliza o Maven Wrapper, o que quer dizer que não será necessário a
 
 ## Como executar os testes de produção
 
-Para a execução de testes nos endpoints, poderá ser utilizada a ferramenta Postman, Curl ou o próprio navegador. Execute o também o microservice registry localizado em `song-recomendation-microservice\appmusic-backend-microservices\app-service-registry` ou remova a anotação \@EnableEurekaClient para a execução do microserviço. 
+Para a execução de testes nos endpoints, poderá ser utilizada a ferramenta Postman, Curl ou o próprio navegador. Execute o também o microservice registry localizado em `song-recomendation-microservice\appmusic-backend-microservices\app-service-registry`.
 Após rodar o comando `mvnw clean package`, execute `java -jar target/suggestion-microservice.jar` da pasta `target` que será gerada. Após a inicialização da aplicação, o endpoint `/playlist` já estará disponíveis para responder às requisições.
 
 ## Endpoints
@@ -25,10 +25,9 @@ Por meio dos endpoints descritos abaixo, é possível interagir com as resouces.
 | Parâmetros    | Descrição     
 |:-------------:|:-------------
 | cityName      | `Required` Retorna um objeto playlist para a cidade informada de acordo com a temperatura
-| orderBy       | Ordena a lista de músicas da playlist. Aceita os valores [ songName, artistName]
-<!-- | decresc       | Altera a ordenação de crescente para decrescente -->
-<!-- | limit         | retorna um um objeto playlist
-| offset        | retorna um um objeto playlist -->
+| orderBy       | Ordena a lista de músicas da playlist. Não surte muito efeito sendo a playlist retorna apenas o nome das músicas. O Default é ordenar alfabeticamente por nome da música.
+| limit         | limita a quantidade de músicas retornadas
+| offset        | especifica de qual elemento a lista deve começar
 
 ### Response Codes
 
