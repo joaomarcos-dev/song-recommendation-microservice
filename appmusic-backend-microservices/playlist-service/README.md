@@ -16,7 +16,7 @@ Após rodar o comando `mvnw clean package`, execute `java -jar target/suggestion
 ## Endpoints
 Por meio dos endpoints descritos abaixo, é possível interagir com as resouces. Não foram implementadas camadas de authenticação, como Bearer tokens.
 
-# http://localhost:8084/playlist/
+## http://localhost:8084/playlist/
 
 | Métodos       | Descrição     
 |:-------------:|:-------------
@@ -30,7 +30,7 @@ Por meio dos endpoints descritos abaixo, é possível interagir com as resouces.
 <!-- | limit         | retorna um um objeto playlist
 | offset        | retorna um um objeto playlist -->
 
-# Response Codes
+### Response Codes
 
 | Status Code   | Descrição     
 |:-------------:|:-------------
@@ -39,7 +39,7 @@ Por meio dos endpoints descritos abaixo, é possível interagir com as resouces.
 | 400           | Houve erro ao tentar processar a requisição, verificar se nome dos parâmetros foram digitados corretamente
 | 500           | retorna um um objeto playlist
 
-# Object Reference
+### Object Reference
 
 | Playlist      | Descrição     
 |:-------------:|:-------------
